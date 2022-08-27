@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Sat Aug 27 13:45:09 2022
+# Process ID: 15152
+# Current directory: E:/synchronization/4-1/CPU/team/PipelineCPU
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent14936 E:\synchronization\4-1\CPU\team\PipelineCPU\PipelineCPU.xpr
+# Log file: E:/synchronization/4-1/CPU/team/PipelineCPU/vivado.log
+# Journal file: E:/synchronization/4-1/CPU/team/PipelineCPU\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/synchronization/4-1/CPU/team/PipelineCPU/PipelineCPU.xpr
+update_compile_order -fileset sources_1

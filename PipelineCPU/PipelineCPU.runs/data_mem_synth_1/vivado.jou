@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Fri Aug 26 15:54:30 2022
+# Process ID: 2140
+# Current directory: E:/Synchronization/4-1/CPU/team/PipelineCPU/PipelineCPU.runs/data_mem_synth_1
+# Command line: vivado.exe -log data_mem.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source data_mem.tcl
+# Log file: E:/Synchronization/4-1/CPU/team/PipelineCPU/PipelineCPU.runs/data_mem_synth_1/data_mem.vds
+# Journal file: E:/Synchronization/4-1/CPU/team/PipelineCPU/PipelineCPU.runs/data_mem_synth_1\vivado.jou
+#-----------------------------------------------------------
+source data_mem.tcl -notrace
