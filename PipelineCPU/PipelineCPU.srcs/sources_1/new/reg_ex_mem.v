@@ -34,7 +34,7 @@ module reg_ex_mem(
             mem_mem_write <= ex_mem_write;
             mem_alu_out <= ex_alu_out;
             mem_mem2reg <= ex_mem2reg;
-            end
+        end
     end
             
 endmodule

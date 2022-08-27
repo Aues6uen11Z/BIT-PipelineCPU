@@ -30,4 +30,6 @@ module reg_mem_wb(
             wb_alu_out <= mem_alu_out;
             wb_mem_rd <= mem_mem_rd;
             wb_reg_wa <= mem_reg_wa;
+        end 
+    end
 endmodule

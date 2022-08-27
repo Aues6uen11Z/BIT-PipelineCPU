@@ -1,7 +1,7 @@
-PipelineCPU/.Xil
-PipelineCPU/PipelineCPU.cache
-PipelineCPU/PipelineCPU.hw
-PipelineCPU/PipelineCPU.ip_user_files
-PipelineCPU/PipelineCPU.runs
-*.jou
-*.log
+PipelineCPU/.Xil/
+PipelineCPU/PipelineCPU.cache/
+PipelineCPU/PipelineCPU.hw/
+PipelineCPU/PipelineCPU.ip_user_files/
+PipelineCPU/PipelineCPU.runs/
+PipelineCPU/*.jou
+PipelineCPU/*.log

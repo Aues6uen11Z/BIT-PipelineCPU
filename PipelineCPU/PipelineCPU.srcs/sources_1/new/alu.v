@@ -6,7 +6,7 @@ module alu(
     input   wire[31:0]  alu_in1,
     input   wire[31:0]  alu_in2,
     
-    output  wire[31:0]   alu_out,
+    output  wire[31:0]  alu_out,
     output  wire        alu_equal
     );
     
@@ -36,5 +36,5 @@ module alu(
                      (alu_op == `ALU_LUI) ? o_lui[31:0] :
                      32'b0;
     assign alu_equal = (in1 == in2) ? 1 : 0;
-                     
+
 endmodule
