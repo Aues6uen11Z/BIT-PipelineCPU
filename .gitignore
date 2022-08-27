@@ -5,3 +5,4 @@ PipelineCPU/PipelineCPU.ip_user_files/
 PipelineCPU/PipelineCPU.runs/
 PipelineCPU/*.jou
 PipelineCPU/*.log
+.idea/
