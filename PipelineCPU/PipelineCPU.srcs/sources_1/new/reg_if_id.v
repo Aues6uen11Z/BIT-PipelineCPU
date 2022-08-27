@@ -10,4 +10,15 @@ module reg_if_id(
     output  reg[31:0]   id_pc,
     output  reg[31:0]   id_instr
     );
+    
+    always @ (posedge clk) begin
+        if(rst) begin
+            id_pc <= 32'b0;
+            id_instr <= 32'b0;
+        end else begin
+            id_pc <= if_pc;
+            id_instr <= if_instr;
+        end
+    end
+
 endmodule

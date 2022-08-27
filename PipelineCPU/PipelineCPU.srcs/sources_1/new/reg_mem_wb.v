@@ -18,7 +18,7 @@ module reg_mem_wb(
     );
     
     always@ (posedge clk) begin
-         if(rst == 0) begin
+         if(rst) begin
             wb_reg_write <= 1'b0;
             wb_mem2reg <= 1'b0;
             wb_alu_out <= 32'b0;

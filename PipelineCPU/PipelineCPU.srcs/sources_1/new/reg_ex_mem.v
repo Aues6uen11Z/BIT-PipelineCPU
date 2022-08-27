@@ -20,7 +20,7 @@ module reg_ex_mem(
     );
     
     always@ (posedge clk) begin
-        if(rst == 0) begin
+        if(rst) begin
             mem_reg_wa <= 32'b0;
             mem_reg_write <= 1'b0;
             mem_mem_write <= 1'b0;

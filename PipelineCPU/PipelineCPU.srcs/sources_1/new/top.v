@@ -56,7 +56,6 @@ assign opcode = id_instr[31:26];
 assign func = id_instr[5:0];
 
 cu _cu(
-    .rst(rst),
     .cu_opcode(opcode),
     .cu_func(func),
     .cu_branch(id_branch),
