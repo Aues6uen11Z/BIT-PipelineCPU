@@ -57,17 +57,17 @@ module cu(
                         2'b00;
     assign cu_mem_write = (instr_id==`ID_SW) ? 1 : 0;
     assign cu_mem2reg = (instr_id==`ID_LW) ? 1 : 0;
-    reg[20:0] mask_reg_dst = 21'b111111111100000000000;
+    reg[21:0] mask_reg_dst = 22'b0000000000011111111110;
     assign cu_reg_dst = mask_reg_dst[instr_id];
-    reg[20:0] mask_reg_write = 21'b111111111111111110000;
+    reg[21:0] mask_reg_write = 22'b0000111111111111111110;
     assign cu_reg_write = mask_reg_write[instr_id];
-    reg[20:0] mask_alu_src = 21'b000000000011111111000;
+    reg[21:0] mask_alu_src = 22'b0001111111100000000000;
     assign cu_alu_src = mask_alu_src[instr_id];
-    reg[20:0] mask_sign_ext = 21'b000000000010000011110;
+    reg[21:0] mask_sign_ext = 22'b0111100000100000000000;
     assign cu_sign_ext = mask_sign_ext[instr_id];
     
     assign cu_alu_op = get_alu_op(instr_id);
-    function [3:0] get_alu_op(input [3:0] instr_id);
+    function [4:0] get_alu_op(input [4:0] instr_id);
     begin
         case(instr_id)
             `ID_ADD,`ID_ADDU,

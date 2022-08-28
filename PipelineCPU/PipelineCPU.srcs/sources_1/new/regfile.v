@@ -20,7 +20,7 @@ module regfile(
     assign reg_rd2 = regs[reg_ra2];
     
     integer i;
-    always @(posedge clk) begin
+    always @(negedge clk) begin
         if (rst) begin
             for (i = 0; i <= 31; i = i + 1) regs[i] <= 32'b0;
         end

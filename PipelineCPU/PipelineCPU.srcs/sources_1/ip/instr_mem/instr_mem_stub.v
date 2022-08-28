@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-// Date        : Fri Aug 26 15:52:40 2022
+// Date        : Sun Aug 28 12:05:31 2022
 // Host        : LAPTOP-4S14BPG4 running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               e:/Synchronization/4-1/CPU/team/PipelineCPU/PipelineCPU.srcs/sources_1/ip/instr_mem/instr_mem_stub.v
+//               E:/PipelineCPU/PipelineCPU.srcs/sources_1/ip/instr_mem/instr_mem_stub.v
 // Design      : instr_mem
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a35tcsg324-1

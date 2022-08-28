@@ -3,6 +3,7 @@ PipelineCPU/PipelineCPU.cache/
 PipelineCPU/PipelineCPU.hw/
 PipelineCPU/PipelineCPU.ip_user_files/
 PipelineCPU/PipelineCPU.runs/
+PipelineCPU/PipelineCPU.sim
 PipelineCPU/*.jou
 PipelineCPU/*.log
 .idea/

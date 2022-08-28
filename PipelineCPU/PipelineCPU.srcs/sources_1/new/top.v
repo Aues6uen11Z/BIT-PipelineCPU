@@ -2,9 +2,9 @@
 
 module top(
     input   wire    clk,
-    input   wire    rst
+    input   wire    rstn
     );
-
+wire rst = !rstn;
 
 /* ----------------取指阶段---------------- */
 // 指令计数器
