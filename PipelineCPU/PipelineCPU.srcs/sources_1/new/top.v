@@ -43,7 +43,7 @@ reg_if_id _reg_if_id(
 // 控制单元
 wire[5:0]   opcode;     //不传到下一级不写前缀，下同
 wire[5:0]   func;
-wire[1:0]   id_branch;
+wire[1:0]   branch;
 wire        reg_dst;
 wire        id_reg_write;
 wire        id_alu_src;
@@ -58,7 +58,7 @@ assign func = id_instr[5:0];
 cu _cu(
     .cu_opcode(opcode),
     .cu_func(func),
-    .cu_branch(id_branch),
+    .cu_branch(branch),
     .cu_reg_dst(reg_dst),
     .cu_reg_write(id_reg_write),
     .cu_alu_src(id_alu_src),
@@ -104,8 +104,27 @@ extension _extension(
     .ext_imm32(id_imm)
 );
 
+// 分支跳转单元
+wire branch_taken;
+wire equal;
+wire[31:0]  br_tgt;
+assign branch_taken = (branch==2'b11) ? 1'b1 :
+                    (branch==2'b01 && equal==1'b1) ? 1'b1 :
+                    (branch==2'b10 && equal==1'b0) ? 1'b1 :
+                    1'b0;
+branch _branch(
+    .br_pc(id_pc),
+    .br_imm(id_imm),
+    .br_op(branch),
+    .br_rd1(id_reg_rd1),
+    .br_rd2(id_reg_rd2),
+    .br_equal(equal),
+    .br_tgt(br_tgt)
+);
+
+assign pc_i = (branch_taken==1) ? br_tgt : if_pc;
+
 // ID/EX流水寄存器
-wire[1:0]   ex_branch;
 wire        ex_reg_write;
 wire        ex_alu_src;
 wire[3:0]   ex_alu_op;
@@ -115,11 +134,9 @@ wire[31:0]  ex_reg_rd1;
 wire[31:0]  ex_reg_rd2;
 wire[31:0]  ex_reg_wa;
 wire[31:0]  ex_imm;
-wire[31:0]  ex_pc;
 reg_id_ex _reg_id_ex(
     .clk(clk),
     .rst(rst),
-    .id_branch(id_branch),
     .id_reg_write(id_reg_write),
     .id_alu_src(id_alu_src),
     .id_alu_op(id_alu_op),
@@ -129,8 +146,6 @@ reg_id_ex _reg_id_ex(
     .id_reg_rd2(id_reg_rd2),
     .id_reg_wa(id_reg_wa),
     .id_imm(id_imm),
-    .id_pc(id_pc),
-    .ex_branch(ex_branch),
     .ex_reg_write(ex_reg_write),
     .ex_alu_src(ex_alu_src),
     .ex_alu_op(ex_alu_op),
@@ -139,8 +154,7 @@ reg_id_ex _reg_id_ex(
     .ex_reg_rd1(ex_reg_rd1),
     .ex_reg_rd2(ex_reg_rd2),
     .ex_reg_wa(ex_reg_wa),
-    .ex_imm(ex_imm),
-    .ex_pc(ex_pc)
+    .ex_imm(ex_imm)
 );
 
 
@@ -148,32 +162,13 @@ reg_id_ex _reg_id_ex(
 // 算数逻辑单元
 wire[31:0]  alu_in2;
 wire[31:0]  ex_alu_out;
-wire        equal;
 assign alu_in2 = (ex_alu_src==1) ? ex_imm : ex_reg_rd2;
 alu _alu(
     .alu_op(ex_alu_op),
     .alu_in1(ex_reg_rd1),
     .alu_in2(alu_in2),
-    .alu_out(ex_alu_out),
-    .alu_equal(equal)
+    .alu_out(ex_alu_out)
 );
-
-// 分支跳转单元
-wire    branch_taken;
-assign branch_taken = (ex_branch==2'b11) ? 1'b1 :
-                    (ex_branch==2'b01 && equal==1'b1) ? 1'b1 :
-                    (ex_branch==2'b10 && equal==1'b0) ? 1'b1 :
-                    1'b0;
-
-wire[31:0]  br_tgt;
-branch _branch(
-    .br_pc(ex_pc),
-    .br_imm(ex_imm),
-    .br_op(ex_branch),
-    .br_tgt(br_tgt)
-);
-
-assign pc_i = (branch_taken==1) ? br_tgt : if_pc;
 
 // EX/MEM流水寄存器
 wire        mem_reg_write;
