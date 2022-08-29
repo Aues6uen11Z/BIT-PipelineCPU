@@ -4,16 +4,16 @@ module regfile(
     input   wire        clk,
     input   wire        rst,
     
-    input   wire[31:0]  reg_ra1,    //读地址
-    input   wire[31:0]  reg_ra2,
+    input   wire[4:0]   reg_ra1,    //读地址
+    input   wire[4:0]   reg_ra2,
     input   wire        reg_we,     //写使能
-    input   wire[31:0]  reg_wa,     //写地址
+    input   wire[4:0]   reg_wa,     //写地址
     input   wire[31:0]  reg_wd,     //待写数据
     input   wire        ex_wreg,    //处于执行阶段的指令是否要写目的寄存器
-    input   wire[31:0]  ex_wdst,    //处于执行阶段的指令要写的目的寄存器地址
+    input   wire[4:0]   ex_wdst,    //处于执行阶段的指令要写的目的寄存器地址
     input   wire[31:0]  ex_wdata,   //处于执行阶段的指令要写入目的寄存器的数据
     input   wire        mem_wreg,   //处于访存阶段的指令是否要写目的寄存器
-    input   wire[31:0]  mem_wdst,   //处于访存阶段的指令要写的目的寄存器地址
+    input   wire[4:0]   mem_wdst,   //处于访存阶段的指令要写的目的寄存器地址
     input   wire[31:0]  mem_wdata,  //处于访存阶段的指令要写入目的寄存器的数据
     
     output  wire[31:0]  reg_rd1,    //读出数据

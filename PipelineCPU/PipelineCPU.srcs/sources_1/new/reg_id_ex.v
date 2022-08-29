@@ -11,7 +11,7 @@ module reg_id_ex(
     input   wire        id_mem2reg,
     input   wire[31:0]  id_reg_rd1,
     input   wire[31:0]  id_reg_rd2,
-    input   wire[31:0]  id_reg_wa,
+    input   wire[4:0]   id_reg_wa,
     input   wire[31:0]  id_imm,
     
     output  reg         ex_reg_write,
@@ -21,7 +21,7 @@ module reg_id_ex(
     output  reg         ex_mem2reg,
     output  reg[31:0]   ex_reg_rd1,
     output  reg[31:0]   ex_reg_rd2,
-    output  reg[31:0]   ex_reg_wa,
+    output  reg[4:0]    ex_reg_wa,
     output  reg[31:0]   ex_imm
     );
     
@@ -34,7 +34,7 @@ module reg_id_ex(
             ex_mem2reg <= 1'b0;
             ex_reg_rd1 <= 32'b0;
             ex_reg_rd2 <= 32'b0;
-            ex_reg_wa <= 3'b0;
+            ex_reg_wa <= 5'b0;
             ex_imm <= 32'b0;
         end else begin
             ex_reg_write <= id_reg_write;

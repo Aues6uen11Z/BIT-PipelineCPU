@@ -69,22 +69,22 @@ cu _cu(
 );
 
 // 寄存器堆
-wire[31:0]  ra1;
-wire[31:0]  ra2;
-wire[31:0]  id_reg_wa;
+wire[4:0]   ra1;
+wire[4:0]   ra2;
+wire[4:0]   id_reg_wa;
 wire[31:0]  id_reg_rd1;
 wire[31:0]  id_reg_rd2;
 // 执行阶段数据前推
 wire        ex_reg_write;
-wire[31:0]  ex_reg_wa;
+wire[4:0]   ex_reg_wa;
 wire[31:0]  ex_reg_wd;
 // 访存阶段数据前推
 wire        mem_reg_write;
-wire[31:0]  mem_reg_wa;
+wire[4:0]   mem_reg_wa;
 wire[31:0]  mem_reg_wd;
 // 写回阶段赋值
 wire        wb_reg_write;
-wire[31:0]  wb_reg_wa;
+wire[4:0]   wb_reg_wa;
 wire[31:0]  wb_reg_wd;
 
 assign ra1 = id_instr[25:21];

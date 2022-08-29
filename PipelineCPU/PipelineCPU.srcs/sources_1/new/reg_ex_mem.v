@@ -9,19 +9,19 @@ module reg_ex_mem(
     input   wire        ex_mem2reg,
     input   wire[31:0]  ex_alu_out,
     input   wire[31:0]  ex_mem_wd,
-    input   wire[31:0]  ex_reg_wa,
+    input   wire[4:0]   ex_reg_wa,
     
     output  reg         mem_reg_write,
     output  reg         mem_mem_write,
     output  reg         mem_mem2reg,
     output  reg[31:0]   mem_alu_out,
     output  reg[31:0]   mem_mem_wd,
-    output  reg[31:0]   mem_reg_wa
+    output  reg[4:0]    mem_reg_wa
     );
     
     always@ (posedge clk) begin
         if(rst) begin
-            mem_reg_wa <= 32'b0;
+            mem_reg_wa <= 5'b0;
             mem_reg_write <= 1'b0;
             mem_mem_write <= 1'b0;
             mem_mem_wd <= 32'b0;

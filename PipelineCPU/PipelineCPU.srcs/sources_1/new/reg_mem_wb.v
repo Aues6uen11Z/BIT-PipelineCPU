@@ -8,13 +8,13 @@ module reg_mem_wb(
     input   wire        mem_mem2reg,
     input   wire[31:0]  mem_alu_out,
     input   wire[31:0]  mem_mem_rd,
-    input   wire[31:0]  mem_reg_wa,
+    input   wire[4:0]   mem_reg_wa,
     
     output  reg         wb_reg_write,
     output  reg         wb_mem2reg,
     output  reg[31:0]   wb_alu_out,
     output  reg[31:0]   wb_mem_rd,
-    output  reg[31:0]   wb_reg_wa
+    output  reg[4:0]    wb_reg_wa
     );
     
     always@ (posedge clk) begin
@@ -23,7 +23,7 @@ module reg_mem_wb(
             wb_mem2reg <= 1'b0;
             wb_alu_out <= 32'b0;
             wb_mem_rd <= 32'b0;
-            wb_reg_wa <= 32'b0;
+            wb_reg_wa <= 5'b0;
         end else begin
             wb_reg_write <= mem_reg_write;
             wb_mem2reg <= mem_mem2reg;
