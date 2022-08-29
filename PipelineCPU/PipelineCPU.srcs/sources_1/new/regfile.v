@@ -14,8 +14,8 @@ module regfile(
     input   wire[31:0]  ex_wdata,   //处于执行阶段的指令要写入目的寄存器的数据
     input   wire        mem_wreg,   //处于访存阶段的指令是否要写目的寄存器
     input   wire[31:0]  mem_wdst,   //处于访存阶段的指令要写的目的寄存器地址
-    
     input   wire[31:0]  mem_wdata,  //处于访存阶段的指令要写入目的寄存器的数据
+    
     output  wire[31:0]  reg_rd1,    //读出数据
     output  wire[31:0]  reg_rd2
     );

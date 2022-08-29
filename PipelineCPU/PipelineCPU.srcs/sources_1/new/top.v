@@ -74,13 +74,16 @@ wire[31:0]  ra2;
 wire[31:0]  id_reg_wa;
 wire[31:0]  id_reg_rd1;
 wire[31:0]  id_reg_rd2;
+// 执行阶段数据前推
 wire        ex_reg_write;
 wire[31:0]  ex_reg_wa;
-wire[31:0]  ex_alu_out;
+wire[31:0]  ex_reg_wd;
+// 访存阶段数据前推
 wire        mem_reg_write;
 wire[31:0]  mem_reg_wa;
-wire[31:0]  mem_alu_out;
-wire        wb_reg_write;   //写回阶段赋值，下同
+wire[31:0]  mem_reg_wd;
+// 写回阶段赋值
+wire        wb_reg_write;
 wire[31:0]  wb_reg_wa;
 wire[31:0]  wb_reg_wd;
 
@@ -98,10 +101,10 @@ regfile _regfile(
     .reg_wd(wb_reg_wd),
     .ex_wreg(ex_reg_write),
     .ex_wdst(ex_reg_wa),
-    .ex_wdata(ex_alu_out),
+    .ex_wdata(ex_reg_wd),
     .mem_wreg(mem_reg_write),
     .mem_wdst(mem_reg_wa),
-    .mem_wdata(mem_alu_out),
+    .mem_wdata(mem_reg_wd),
     .reg_rd1(id_reg_rd1),
     .reg_rd2(id_reg_rd2)
 );
@@ -171,7 +174,9 @@ reg_id_ex _reg_id_ex(
 /* ----------------执行阶段---------------- */
 // 算数逻辑单元
 wire[31:0]  alu_in2;
+wire[31:0]  ex_alu_out;
 assign alu_in2 = (ex_alu_src==1) ? ex_imm : ex_reg_rd2;
+assign ex_reg_wd = ex_alu_out;
 alu _alu(
     .alu_op(ex_alu_op),
     .alu_in1(ex_reg_rd1),
@@ -183,6 +188,7 @@ alu _alu(
 wire        mem_mem_write;
 wire        mem_mem2reg;
 wire[31:0]  mem_mem_wd;
+wire[31:0]  mem_alu_out;
 reg_ex_mem _reg_ex_mem(
     .clk(clk),
     .rst(rst),
@@ -211,6 +217,7 @@ data_mem _data_mem(
     .we(mem_mem_write),
     .spo(mem_mem_rd)
 );
+assign mem_reg_wd = (mem_mem2reg==1) ? mem_mem_rd : mem_alu_out;
 
 // MEM/WB流水寄存器
 wire        wb_mem2reg;
