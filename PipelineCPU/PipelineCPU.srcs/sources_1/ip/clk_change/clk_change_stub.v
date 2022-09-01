@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-// Date        : Wed Aug 31 21:09:08 2022
+// Date        : Thu Sep  1 19:59:38 2022
 // Host        : DESKTOP-52COAKC running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               e:/synchronization/4-1/CPU/team/PipelineCPU/PipelineCPU.srcs/sources_1/ip/clk_change/clk_change_stub.v
+//               E:/synchronization/4-1/CPU/team/PipelineCPU/PipelineCPU.srcs/sources_1/ip/clk_change/clk_change_stub.v
 // Design      : clk_change
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a35tcsg324-1

@@ -30,14 +30,21 @@ module regfile(
     assign reg_rd2 = (ex_wreg && ex_wdst == reg_ra2) ? ex_wdata :
                      (mem_wreg && mem_wdst == reg_ra2) ? mem_wdata : regs[reg_ra2];
 
+    // 防止按下按键太久反复写入寄存器
+    reg vga_en_d0, vga_en_d1;
+    always @(negedge clk) begin
+        vga_en_d1 <= vga_en;
+        vga_en_d0 <= vga_en_d1;
+    end
+    
     integer i;
     always @(negedge clk) begin
         if (rst) begin
             for (i = 0; i <= 31; i = i + 1) regs[i] <= 32'b0;
         end
         else if (reg_we) regs[reg_wa] <= reg_wd;
+        else if (!vga_en_d0 && vga_en_d1) regs[5'h6] <= {{14'b0},vga_dir} + 1'b1;
     end
     
-    always @(posedge vga_en) regs[5'h6] <= {{14'b0},vga_dir} + 1'b1;   // 寄存器$6写入方向控制信号
     assign  vga_pos = regs[5'h1];
 endmodule

@@ -5,15 +5,19 @@ module testbench();
     initial begin
         rstn = 1'b0;
         clk = 1'b1;
+        btn_left = 1'b0;
+        btn_right = 1'b0;
+        btn_up = 1'b0;
+        btn_down = 1'b0;
         #20 rstn = 1'b1;
     end
 
     always #5 clk = ~clk;
     
     always begin
-        #100
+        #200
         btn_left = 1'b1;
-        #30
+        #1000
         btn_left = 1'b0;
         
         #200

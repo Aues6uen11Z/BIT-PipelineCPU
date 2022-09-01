@@ -72,16 +72,41 @@ module display(
     wire[9:0] x, y;
     assign x = vga_pos % 10'd800;
     assign y = vga_pos / 10'd800;
+    wire[9:0] top = y - 10'd15;
+    wire[9:0] bottom = y + 10'd15;
+    wire[9:0] left = x - 10'd15;
+    wire[9:0] right = x + 10'd15;
     always @(posedge clk) begin
-        if ((x-h_count)<30 && (h_count-x)<30 && (y-v_count)<30 && (v_count-y)<30) begin
-          reg_red   <= 4'b0100;
-          reg_green <= 4'b0010;
-          reg_blue  <= 4'b0001;
+        if (h_count>left && h_count<right && v_count>top && v_count<bottom) begin
+            if(v_count>top+10'd6 && v_count<top+10'd12) begin
+                if((h_count>left+10'd3 && h_count<left+10'd12) || (h_count>right-10'd12 && h_count<right-10'd3)) begin  // ÑÛ¾¦
+                    reg_red   <= 4'b0;
+                    reg_green <= 4'b0;
+                    reg_blue  <= 4'b0;
+                end
+                else begin   // Á³
+                    reg_red   <= 4'b0100;
+                    reg_green <= 4'b0010;
+                    reg_blue  <= 4'b0001;
+                end
+            end
+            else if(h_count>left+10'd10 && h_count<right-10'd10 && v_count>bottom-10'd10 && v_count<bottom-10'd4) begin // ×ì
+                reg_red     <= 4'b1000;
+                reg_green   <= 4'b0001;
+                reg_blue    <= 4'b0001;
+            end
+            else begin  // Á³
+                reg_red   <= 4'b0100;
+                reg_green <= 4'b0010;
+                reg_blue  <= 4'b0001;
+            end
         end
-        else begin
-            reg_red   <= 4'b0;
-            reg_green <= 4'b0;
-            reg_blue  <= 4'b0;
+        else begin  // ±³¾°
+                reg_red   <= 4'b0;
+                reg_green <= 4'b0;
+                reg_blue  <= 4'b0;
         end
     end
+
+
 endmodule
