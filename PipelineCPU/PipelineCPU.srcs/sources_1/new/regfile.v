@@ -17,7 +17,11 @@ module regfile(
     input   wire[31:0]  mem_wdata,  //处于访存阶段的指令要写入目的寄存器的数据
     
     output  wire[31:0]  reg_rd1,    //读出数据
-    output  wire[31:0]  reg_rd2
+    output  wire[31:0]  reg_rd2,
+    
+    input   wire        vga_en,     // 方向控制使能信号
+    input   wire[1:0]   vga_dir,    // 方向控制
+    output  wire[31:0]  vga_pos     // 从寄存器$1读出的位置信息
     );
     reg [31:0] regs[31:0];
     
@@ -31,6 +35,9 @@ module regfile(
         if (rst) begin
             for (i = 0; i <= 31; i = i + 1) regs[i] <= 32'b0;
         end
-        else if (reg_we == 1'b1) regs[reg_wa] <= reg_wd;
+        else if (reg_we) regs[reg_wa] <= reg_wd;
     end
+    
+    always @(posedge vga_en) regs[5'h6] <= {{14'b0},vga_dir} + 1'b1;   // 寄存器$6写入方向控制信号
+    assign  vga_pos = regs[5'h1];
 endmodule

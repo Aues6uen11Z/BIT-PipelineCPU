@@ -1,8 +1,12 @@
 `timescale 1ns / 1ps
 
-module top(
-    input   wire    clk,
-    input   wire    rstn
+module cpu_top(
+    input   wire        clk,
+    input   wire        rstn,
+    
+    input   wire        vga_en,     // 方向控制使能信号
+    input   wire[1:0]   vga_dir,    // 方向控制
+    output  wire[31:0]  vga_pos     // 从寄存器$1读出的位置信息
     );
 wire rst = !rstn;
 
@@ -106,7 +110,11 @@ regfile _regfile(
     .mem_wdst(mem_reg_wa),
     .mem_wdata(mem_reg_wd),
     .reg_rd1(id_reg_rd1),
-    .reg_rd2(id_reg_rd2)
+    .reg_rd2(id_reg_rd2),
+    
+    .vga_en(vga_en),
+    .vga_dir(vga_dir),
+    .vga_pos(vga_pos)
 );
 
 // 符号扩展单元

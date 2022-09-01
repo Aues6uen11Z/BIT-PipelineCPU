@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module testbench();
-    reg rstn, clk;
+    reg rstn, clk, btn_left, btn_right, btn_up, btn_down;
     initial begin
         rstn = 1'b0;
         clk = 1'b1;
@@ -10,8 +10,40 @@ module testbench();
 
     always #5 clk = ~clk;
     
-    top _top(
+    always begin
+        #100
+        btn_left = 1'b1;
+        #30
+        btn_left = 1'b0;
+        
+        #200
+        btn_right = 1'b1;
+        #30
+        btn_right = 1'b0;
+        
+        #200
+        btn_up = 1'b1;
+        #30
+        btn_up = 1'b0;
+        
+        #200
+        btn_down = 1'b1;
+        #30
+        btn_down = 1'b0;
+        
+    end
+    
+    sys_top _sys_top(
+        .clk(clk),
         .rstn(rstn),
-        .clk(clk)
+        .btn_left(btn_left), 
+        .btn_right(btn_right), 
+        .btn_up(btn_up),
+        .btn_down(btn_down),
+        .hsync(hsync),
+        .vsync(vsync),
+        .red(red),
+        .green(green),
+        .blue(blue)
     );
 endmodule

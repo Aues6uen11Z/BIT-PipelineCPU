@@ -60,3 +60,15 @@
 `define ALU_SLTU     4'b1000
 `define ALU_LUI      4'b1001
 `define ALU_CMP      4'b1010
+
+// VGA 640*480,60HzÊ±Ðò²ÎÊý
+`define H_SCAN_TIME     10'd800
+`define H_FRONT_PORCH   10'd16
+`define H_ACTIVE_VIDEO  10'd640
+`define H_BACK_PORCH    10'd48
+`define H_SYNC_PULSE    10'd96
+`define V_SCAN_TIME     10'd525
+`define V_FRONT_PORCH   10'd10
+`define V_ACTIVE_VIDEO  10'd480
+`define V_BACK_PORCH    10'd33
+`define V_SYNC_PULSE    10'd2
